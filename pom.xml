@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wkw2.mini-redis</groupId>
+    <artifactId>mini-redis</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1</version>
+    <modules>
+        <module>mini-redis-core</module>
+        <module>mini-redis-test</module>
+        <module>mini-redis-api</module>
+    </modules>
+
+    <properties>
+        <!--============================== All Plugins START ==============================-->
+        <plugin.compiler.version>3.2</plugin.compiler.version>
+        <plugin.compiler.version>3.2</plugin.compiler.version>
+        <plugin.surefire.version>2.18.1</plugin.surefire.version>
+        <plugin.surefire.skip-it>false</plugin.surefire.skip-it>
+        <plugin.surefire.ignore-failure>false</plugin.surefire.ignore-failure>
+
+        <plugin.maven-javadoc-plugin.version>2.9.1</plugin.maven-javadoc-plugin.version>
+
+
+        <plugin.coveralls.version>4.3.0</plugin.coveralls.version>
+        <plugin.cobertura.version>2.7</plugin.cobertura.version>
+
+        <!--============================== MAIN ==============================-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.compiler.level>1.7</project.compiler.level>
+
+
+        <!--============================== OTHER ==============================-->
+        <junit.version>4.12</junit.version>
+        <fastjson.version>1.2.70</fastjson.version>
+    </properties>
+
+
+
+</project>
