@@ -3,10 +3,12 @@ package com.wkw2.cache.core.bs;
 import com.wkw2.cache.api.*;
 import com.wkw2.cache.core.core.Cache;
 import com.wkw2.cache.core.support.evivt.CacheEvictFIFO;
+import com.wkw2.cache.core.support.expire.CacheExpire;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public final class CacheBs<K,V> {
@@ -26,10 +28,10 @@ public final class CacheBs<K,V> {
         this.sizeLimit = sizeLimit;
         return this;
     }
-    public CacheBs<K,V> expire(ICacheExpire<K,V> expire) {
-        this.expire = expire;
-        return this;
-    }
+//    public CacheBs<K,V> expire(ICacheExpire<K,V> expire) {
+//        this.expire = expire;
+//        return this;
+//    }
     public CacheBs<K,V> load(ICacheLoad<K,V> load) {
         this.load = load;
         return this;
@@ -48,7 +50,7 @@ public final class CacheBs<K,V> {
         Cache<K, V> cache = new Cache<>();
         cache.setMap(map);
         cache.setSizeLimit(sizeLimit);
-        cache.setExpire(expire);
+//        cache.setExpire(expire);
         cache.setLoad(load);
         cache.setRemoveListeners(removeListeners);
         cache.setSlowListeners(slowListeners);
@@ -60,7 +62,7 @@ public final class CacheBs<K,V> {
     /**
      * 缓存map信息
      */
-    private Map<K,V> map = new HashMap<>();
+    private Map<K,V> map = new ConcurrentHashMap<>();
     /**
      * 缓存大小
      */
@@ -69,10 +71,10 @@ public final class CacheBs<K,V> {
      * 启动时持久化策略
      */
     private ICacheLoad<K,V> load;
-    /**
-     * 缓存过期策略
-     */
-    private ICacheExpire<K,V> expire;
+//    /**
+//     * 缓存过期策略
+//     */
+//    private ICacheExpire<K,V> expire = new CacheExpire<>();
     /**
      * 缓存淘汰策略
      */

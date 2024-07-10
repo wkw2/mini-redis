@@ -2,12 +2,10 @@ package com.wkw2.cache.core.core;
 
 import com.wkw2.cache.api.*;
 import com.wkw2.cache.core.support.evivt.CacheEvictContext;
+import com.wkw2.cache.core.support.expire.CacheExpire;
 import lombok.Data;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Data
 public class Cache<K, V> implements ICache<K, V> {
@@ -28,7 +26,7 @@ public class Cache<K, V> implements ICache<K, V> {
     /**
      * 缓存过期策略
      */
-    private ICacheExpire<K, V> expire;
+    private ICacheExpire<K, V> expire = new CacheExpire<>(this);
     /**
      * 内存淘汰策略
      */
@@ -45,13 +43,13 @@ public class Cache<K, V> implements ICache<K, V> {
 
     @Override
     public ICache<K, V> expire(K key, long timeInMills) {
-        return null;
+        this.expire.expire(key, timeInMills);
+        return this;
     }
 
     @Override
     public ICache<K, V> expireAt(K key, long timeInMills) {
-        long ct = System.currentTimeMillis() + timeInMills;
-
+       this.expire.expireAt(key, timeInMills);
         return null;
     }
 
@@ -83,6 +81,7 @@ public class Cache<K, V> implements ICache<K, V> {
 
     @Override
     public V get(Object key) {
+        this.expire.refreshExpire(Collections.singletonList((K)key));
         return map.get(key);
     }
 
